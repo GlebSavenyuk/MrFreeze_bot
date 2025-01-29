@@ -28,3 +28,7 @@ def delete_product(name):
 def get_products():
     return products
 
+def clear():
+    global products
+    products.clear()
+    
