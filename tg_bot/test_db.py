@@ -6,26 +6,54 @@ def test_database():
     if not connection:
         return 
 
-    # Добавляем тестовый продукт
-    print("Добавляем продукт...")
-    add_product("Тестовый продукт", "2024-12-31", 2)    
+    # Очищаем таблицу перед тестами
+    print("Очищаем таблицу...")
+    clear_products()
 
-    # Показываем список до удаления
-    print("\nСписок продуктов до удаления:")
+    # Тест добавления продуктов
+    print("\nДобавляем продукты...")
+    add_product("Молоко", "2024-02-10", 2)
+    add_product("Хлеб", "2024-02-01", 1)
+    add_product("Сыр", "2024-03-15", 3)
+
+    # Показываем список продуктов
+    print("\nСписок всех продуктов:")
     products = get_products()
     for product in products:
         print(product)
 
-    # Удаляем продукт
-    print("\nУдаляем продукт...")
-    result = delete_product("Тестовый продукт")
-    print(f"Результат удаления: {'успешно' if result else 'не найден'}")
+    # Тест редактирования продукта
+    print("\nРедактируем количество молока...")
+    result = edit_products("Молоко", new_quantity=5)
+    print(f"Результат редактирования: {'успешно' if result else 'не удалось'}")
 
-    # Показываем список после удаления
-    print("\nСписок продуктов после удаления:")
+    # Проверяем изменения
+    print("\nСписок после редактирования:")
     products = get_products()
     for product in products:
         print(product)
+
+    # Тест удаления продукта
+    print("\nУдаляем хлеб...")
+    result = delete_product("Хлеб")
+    print(f"Результат удаления: {'успешно' if result else 'не удалось'}")
+
+    # Финальная проверка
+    print("\nФинальный список продуктов:")
+    products = get_products()
+    for product in products:
+        print(product)
+
+    # Очищаем таблицу
+    print("\nОчищаем таблицу...")
+    clear_products()
+    
+    print("\nПроверяем, что таблица пуста:")
+    products = get_products()
+    if not products:
+        print("Таблица успешно очищена")
+    else:
+        print("Ошибка: таблица не пуста")
 
 
 if __name__=="__main__":

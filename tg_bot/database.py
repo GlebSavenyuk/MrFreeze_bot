@@ -68,7 +68,7 @@ def delete_product(name):
 
 
 def clear_products():
-    connection = get_connection
+    connection = get_connection()
     if not connection:
         return False
 
@@ -90,7 +90,7 @@ def edit_products(name, new_expiration_date=None, new_quantity=None):
     if not connection:
         return False
 
-    curursor = connection.cursor()
+    cursor = connection.cursor()
     try:
         updates = []
         values = []
